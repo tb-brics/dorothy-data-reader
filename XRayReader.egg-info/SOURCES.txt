@@ -1,0 +1,7 @@
+setup.py
+XRayReader.egg-info/PKG-INFO
+XRayReader.egg-info/SOURCES.txt
+XRayReader.egg-info/dependency_links.txt
+XRayReader.egg-info/top_level.txt
+clinical_reader/__init__.py
+clinical_reader/file_reader.py

@@ -1,0 +1,14 @@
+Metadata-Version: 2.1
+Name: XRayReader
+Version: 0.0.1
+Summary: A x ray metadata reader package
+Home-page: git@github.com:tb-brics/dorothy-data-reader.git
+Author: TB
+Author-email: author@example.com
+License: UNKNOWN
+Description: Biblioteca para leitura dos laudos
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3.8.5
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
