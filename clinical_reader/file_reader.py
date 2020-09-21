@@ -1,20 +1,18 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
 
 
 import glob
 import re
 
 
-# In[2]:
 
 
 files = glob.glob("C:/Users/paola/Desktop/ClinicalReadings/*.txt")
 
 
-# In[3]:
+
 
 
 class XRayImageMetadata:
@@ -25,7 +23,7 @@ class XRayImageMetadata:
         self.report = kwargs.get('report', None)
     def __str__(self):
         return f"<{self.filename}>:{self.gender}-{self.age} years -{self.report}"
-    
+
 class XRayMetadataReader:
     def __init__(self, folder, **kwargs):
         self.xrays = []
@@ -72,27 +70,25 @@ class ChinaXRayMetadataReader(XRayMetadataReader):
                 gender, age = self.clear_firstline(lines[0])
                 report = lines[1]
                 xray = XRayImageMetadata(gender = gender, age=age, filename=file, report = report)
-                print(xray)
+
                 
     
 
 
-# In[4]:
 
 
-china = ChinaXRayMetadataReader("C:/Users/paola/Desktop/ClinicalReadings/*.txt")
 
 
-# In[5]:
 
 
-china.parse_files()
 
 
-# In[6]:
 
 
-#Montgomery
+
+
+
+
 class MontgomeryXRayMetadataReader(XRayMetadataReader):
     """
     Normally the first line is something like:
@@ -132,36 +128,10 @@ class MontgomeryXRayMetadataReader(XRayMetadataReader):
                 xray = XRayImageMetadata(gender = gender, age = age, filename = file, report = report)
                 DataMontgomery.append(xray)
         return DataMontgomery
-    
-    
-       
-    
-                                            
-        
-        
-        
 
 
-# In[7]:
 
 
-Montgomery = MontgomeryXRayMetadataReader('C:/Users/paola/Desktop/TB/MontgomerySet/ClinicalReadings/*.txt')
-
-
-# In[8]:
-
-
-list_Montgomery = Montgomery.read_files()
-
-
-# In[9]:
-
-
-for item in list_Montgomery:
-    print(item)
-
-
-# In[ ]:
 
 
 
