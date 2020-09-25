@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="XRayReader",
+    name="xrayreader",
     version="0.0.1",
     author="TB",
     author_email="author@example.com",
