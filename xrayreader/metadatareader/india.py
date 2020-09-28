@@ -4,10 +4,10 @@ Class for reading metadata from files of the
 India Dataset
 """
 
-from .reader import Reader
+from .reader import ReaderBase
 
 
-class IndiaMetadaDataReader(Reader):
+class Reader(ReaderBase):
     """
     India data set does not have any report
     """

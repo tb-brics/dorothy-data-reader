@@ -3,11 +3,12 @@ Class for reading metadata from files of the
 Montgomery Dataset
 """
 
-from .reader import Reader
+from .reader import ReaderBase
+from .xray_image_metadata import XRayImageMetadata
 import re
 
 
-class MontgomeryMetadaDataReader(Reader):
+class Reader(ReaderBase):
     """
     Normally the first line is something like:
     <Patient's Sex: (the first letter of the gender, like F or M)>

@@ -2,11 +2,12 @@
 Class for reading metadata from files of the China Dataset
 """
 
-from .reader import Reader
+from .reader import ReaderBase
+from .xray_image_metadata import XRayImageMetadata
 import re
 
 
-class ChinaMetadaDataReader(Reader):
+class Reader(ReaderBase):
     """
     A class to read the file and return the report.
 
