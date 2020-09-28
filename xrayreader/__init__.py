@@ -1,3 +1,3 @@
 from . import metadatareader
 from . import images
-from .data import *
+from .data import Dataset

@@ -19,6 +19,8 @@ class XRayImageMetadata:
               the name of the file of the report
           report: str
               returns the report of the patient
+          has_tb: boolean
+              returns whether the patient has Tb
       """
       self.age = kwargs.get('age', None)
       self.gender = kwargs.get('gender', None)
