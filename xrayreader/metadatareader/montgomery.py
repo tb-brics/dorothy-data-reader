@@ -50,6 +50,12 @@ class Reader(ReaderBase):
            age = None
         return age
 
+    @staticmethod
+    def has_tb(report):
+        if not report:
+            return None    
+        return report.strip() != "normal"
+
     def parse_files(self):
         """
         Stores patient data (age, gender, report) in a list 'data_montgomery'.
@@ -66,6 +72,7 @@ class Reader(ReaderBase):
                 xray = XRayImageMetadata(gender=gender,
                                          age=age,
                                          filename=file,
+                                         has_tb=self.has_tb(report),
                                          report=report)
                 data_montgomery.append(xray)
         return data_montgomery

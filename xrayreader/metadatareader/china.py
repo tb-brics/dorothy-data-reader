@@ -39,6 +39,12 @@ class Reader(ReaderBase):
             age = None
         return gender, age
 
+    @staticmethod
+    def has_tb(report):
+        if not report:
+            return None
+        return report.strip() != 'normal'
+
     def parse_files(self):
         data_china = []
         for file in self.get_filenames():
@@ -51,6 +57,7 @@ class Reader(ReaderBase):
                 xray = XRayImageMetadata(gender=gender,
                         age=age,
                         filename=file,
+                        has_tb= self.has_tb(report),
                         report=report)
                 data_china.append(xray)
         return data_china
