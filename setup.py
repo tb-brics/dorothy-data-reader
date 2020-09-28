@@ -15,7 +15,6 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3.8.5",
-
     ],
     python_requires='>=3.6',
 )

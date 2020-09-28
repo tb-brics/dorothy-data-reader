@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 # coding: utf-8
-
-
+"""
+Module for reading data from XRay Data Set
+"""
 
 import glob
 import re
 
 
-
-
 files = glob.glob("C:/Users/paola/Desktop/ClinicalReadings/*.txt")
+
 
 class XRayImageMetadata:
     """
@@ -33,8 +33,10 @@ class XRayImageMetadata:
         self.gender = kwargs.get('gender', None)
         self.filename = kwargs.get('filename', None)
         self.report = kwargs.get('report', None)
+
     def __str__(self):
-        return f"<{self.filename}>:{self.gender}-{self.age} years -{self.report}"
+        return f"<{self.filename}>:{self.gender}-{self.age} years - {self.report}"
+
 
 class XRayMetadataReader:
     """
@@ -44,18 +46,21 @@ class XRayMetadataReader:
         self.xrays = []
         self.folder = folder
         self.filenames = None
+
     def get_filenames(self):
         """
         Return the name of the file in which the report is stored.
         """
         self.filenames = glob.glob(self.folder)
         return self.filenames
+
     def parse_files(self):
         """
-        This function stores patient data(age, gender, report) in a list 'data_china'.
+        This function stores patient data(age, gender, report)
+        in a list 'data_china'.
         """
-        pass
-#China
+
+
 class ChinaXRayMetadataReader(XRayMetadataReader):
     """
     A class to read the file and return the report.
@@ -75,7 +80,7 @@ class ChinaXRayMetadataReader(XRayMetadataReader):
         Normally the first line is something like:
         <gender> <age>yrs
         """
-        lowercase = firstline.lower()
+        firstline = firstline.lower()
         gender = None
         if 'female' in firstline:
             gender = 'female'
@@ -97,9 +102,13 @@ class ChinaXRayMetadataReader(XRayMetadataReader):
                 lines = [l.strip() for l in lines]
                 gender, age = self.clear_firstline(lines[0])
                 report = lines[1]
-                xray = XRayImageMetadata(gender=gender, age=age, filename=file, report=report)
+                xray = XRayImageMetadata(gender=gender,
+                                         age=age,
+                                         filename=file,
+                                         report=report)
                 data_china.append(xray)
         return data_china
+
 
 class MontgomeryXRayMetadataReader(XRayMetadataReader):
     """
@@ -142,6 +151,7 @@ class MontgomeryXRayMetadataReader(XRayMetadataReader):
         except IndexError:
             age = None
         return age
+
     def read_files(self):
         """
         Stores patient data (age, gender, report) in a list 'data_montgomery'.
@@ -155,6 +165,9 @@ class MontgomeryXRayMetadataReader(XRayMetadataReader):
                 gender = self.patient_gender(lines[0])
                 age = self.patient_age(lines[1])
                 report = lines[2]
-                xray = XRayImageMetadata(gender=gender, age=age, filename=file, report=report)
+                xray = XRayImageMetadata(gender=gender,
+                                         age=age,
+                                         filename=file,
+                                         report=report)
                 data_montgomery.append(xray)
         return data_montgomery
