@@ -39,7 +39,7 @@ class Reader(ReaderBase):
            gender = 'male'
         return gender
 
-   @staticmethod
+    @staticmethod
     def patient_age(secondline):
         """
         Returns the age of the patient.
@@ -50,22 +50,22 @@ class Reader(ReaderBase):
            age = None
         return age
 
-   def parse_files(self):
+    def parse_files(self):
         """
         Stores patient data (age, gender, report) in a list 'data_montgomery'.
         """
         data_montgomery = []
         for file in self.get_filenames():
-          with open(file) as txtfile:
-              content = txtfile.read()
-              lines = content.split('\n')
-              lines = [l.strip() for l in lines]
-              gender = self.patient_gender(lines[0])
-              age = self.patient_age(lines[1])
-              report = lines[2]
-              xray = XRayImageMetadata(gender=gender,
-                      age=age,
-                      filename=file,
-                      report=report)
-              data_montgomery.append(xray)
+            with open(file) as txtfile:
+                content = txtfile.read()
+                lines = content.split('\n')
+                lines = [l.strip() for l in lines]
+                gender = self.patient_gender(lines[0])
+                age = self.patient_age(lines[1])
+                report = lines[2]
+                xray = XRayImageMetadata(gender=gender,
+                                         age=age,
+                                         filename=file,
+                                         report=report)
+                data_montgomery.append(xray)
         return data_montgomery

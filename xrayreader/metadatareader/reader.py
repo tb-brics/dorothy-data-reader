@@ -2,14 +2,19 @@
 Class for reading metadata from xray datasets
 """
 import glob
+import os.path
 
 
 class ReaderBase:
     """
     This class stores the filenames into a list.
     """
-    def __init__(self, path=None):
-        self.folder = path
+    suffix = "*"
+
+    def __init__(self, **kwargs):
+        path = kwargs.get("path")
+        if path:
+            self.folder = os.path.join(path, self.suffix)
         self.filenames = []
 
     def get_filenames(self):
