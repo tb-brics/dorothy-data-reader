@@ -29,4 +29,4 @@ class XRayImageMetadata: #pylint: disable=too-few-public-methods
         self.has_tb = kwargs.get('has_tb', None)
 
     def __str__(self):
-        return f"<{self.filename}>:{self.gender}-{self.age} years - {self.report}"
+        return f"<{self.filename}>:{self.gender}-{self.age} years - {self.has_tb}"
