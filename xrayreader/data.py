@@ -7,7 +7,21 @@ import os.path
 from .metadatareader.xray_image_metadata import XRayImageMetadata
 
 
-class DatasetBase:
+class DatasetBaseInterface:
+    """
+    Interface for Dataset Reader Classes
+    """
+    dataset = None
+
+    def get_data(self):
+        """
+        Get images and metadata from a dataset
+        """
+        raise NotImplemented
+
+
+
+class DatasetBase(DatasetBaseInterface):
     """
     """
     dataset =  None
@@ -48,7 +62,7 @@ class MontgomeryDataset(DatasetBase):
     images_folder = 'CXR_png'
 
 
-class IndiaDataset:
+class IndiaDataset(DatasetBaseInterface):
     dataset = 'india'
  
     def __init__(self, **kwargs):
@@ -69,7 +83,6 @@ class IndiaDataset:
                              dataset=self.images_folder)
 
     def get_data(self):
-
         data = {"data": {}}
         data['data']['dataset'] = self.dataset
         if self.images_folder:
