@@ -1,11 +1,11 @@
 """
-Class for reading metadata from files of the 
+Class for reading metadata from files of the
 Montgomery Dataset
 """
 
+import re
 from .reader import ReaderBase
 from .xray_image_metadata import XRayImageMetadata
-import re
 
 
 class Reader(ReaderBase):
@@ -34,9 +34,9 @@ class Reader(ReaderBase):
         """
         gender = None
         if 'F' in firstline:
-           gender = 'female'
+            gender = 'female'
         elif 'M' in firstline:
-           gender = 'male'
+            gender = 'male'
         return gender
 
     @staticmethod
@@ -45,15 +45,19 @@ class Reader(ReaderBase):
         Returns the age of the patient.
         """
         try:
-           age = int(re.findall(r'\d+', secondline)[0])
+            age = int(re.findall(r'\d+', secondline)[0])
         except IndexError:
-           age = None
+            age = None
         return age
 
     @staticmethod
     def has_tb(report):
+        """
+        Indicates whether the patient has TB or not,
+        or if it is a case of missing data.
+        """
         if not report:
-            return None    
+            return None
         return report.strip() != "normal"
 
     def parse_files(self):

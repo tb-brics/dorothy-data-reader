@@ -1,6 +1,5 @@
-
 """
-Class for reading metadata from files of the 
+Class for reading metadata from files of the
 India Dataset
 """
 

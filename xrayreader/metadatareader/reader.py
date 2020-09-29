@@ -21,7 +21,7 @@ class ReaderBase:
         """
         Return the name of the file in which the report is stored.
         """
-        if self.folder: 
+        if self.folder:
             self.filenames = glob.glob(self.folder)
         return self.filenames
 
@@ -29,4 +29,3 @@ class ReaderBase:
         """
         This function stores patient data(age, gender, report) in a list 'data_china'.
         """
-        pass

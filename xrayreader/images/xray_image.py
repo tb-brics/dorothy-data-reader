@@ -5,7 +5,7 @@ XRay Image Container
 import os.path
 
 
-class Image:
+class Image: #pylint: disable=too-few-public-methods
     """
     Image file data
     """

@@ -2,10 +2,9 @@
 Class for reading metadata from files of the China Dataset
 """
 
+import re
 from .reader import ReaderBase
 from .xray_image_metadata import XRayImageMetadata
-import re
-
 
 class Reader(ReaderBase):
     """
@@ -41,6 +40,10 @@ class Reader(ReaderBase):
 
     @staticmethod
     def has_tb(report):
+        """
+        Indicates whether the patient has TB or not,
+        or if it is a case of missing data.
+        """
         if not report:
             return None
         return report.strip() != 'normal'

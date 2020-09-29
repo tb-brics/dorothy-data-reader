@@ -2,8 +2,8 @@
 Get images from India DataSet
 """
 
-from .reader import ReaderBase
 import os.path
+from .reader import ReaderBase
 
 
 class Reader(ReaderBase):
@@ -20,6 +20,4 @@ class Reader(ReaderBase):
         path = kwargs.get("path")
         if path:
             path = os.path.join(path, dataset)
-
         super(Reader, self).__init__(path=path)
-

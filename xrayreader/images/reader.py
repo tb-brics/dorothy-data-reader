@@ -2,9 +2,9 @@
 Base class for parsing xray image files in a directory
 """
 
-from .xray_image import Image
 import glob
 import os.path
+from .xray_image import Image
 
 
 class ReaderBase:
@@ -23,9 +23,12 @@ class ReaderBase:
         """
         Return the name of the file in which the report is stored.
         """
-        if self.folder: 
+        if self.folder:
             filenames = glob.glob(self.folder)
         return filenames
 
     def get_images(self):
+        """
+        Returns the name of the files where the images are stored.
+        """
         return [Image(filename=f) for f in self.get_filenames()]

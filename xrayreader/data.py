@@ -3,11 +3,10 @@ Class for retriving data from several datasets
 """
 import importlib
 import os.path
-
 from .metadatareader.xray_image_metadata import XRayImageMetadata
 
 
-class DatasetBaseInterface:
+class DatasetBaseInterface: #pylint: disable=too-few-public-methods
     """
     Interface for Dataset Reader Classes
     """
@@ -17,14 +16,16 @@ class DatasetBaseInterface:
         """
         Get images and metadata from a dataset
         """
-        raise NotImplemented
+        raise NotImplementedError
 
 
 
-class DatasetBase(DatasetBaseInterface):
+class DatasetBase(DatasetBaseInterface): #pylint: disable=too-few-public-methods
     """
+     stores the path where the files are saved
+      so that the data can be read.
     """
-    dataset =  None
+    dataset = None
     metadata_folder = None
     images_folder = None
 
@@ -50,33 +51,50 @@ class DatasetBase(DatasetBaseInterface):
         return data
 
 
-class ChinaDataset(DatasetBase):
+class ChinaDataset(DatasetBase):#pylint: disable=too-few-public-methods
+    """
+    Get metadata and images from China.
+    """
     dataset = 'china'
     metadata_folder = 'ClinicalReadings'
     images_folder = 'CXR_png'
 
 
-class MontgomeryDataset(DatasetBase):
+class MontgomeryDataset(DatasetBase): #pylint: disable=too-few-public-methods
+    """
+    Get metadata and images from Montgomery.
+    """
     dataset = 'montgomery'
     metadata_folder = 'ClinicalReadings'
     images_folder = 'CXR_png'
 
 
 class IndiaDataset(DatasetBaseInterface):
+    """
+    Get information from India.
+    """
     dataset = 'india'
- 
+
     def __init__(self, **kwargs):
         self.path = kwargs.get("path")
         self.images_folder = kwargs.get("folder", "DatasetA")
 
     @staticmethod
     def get_metadata(filename):
+        """
+        Returns the name of the file
+        and tells whether the patient from India has tb.
+        """
         return XRayImageMetadata(
                 filename=filename,
-                has_tb = filename.imagename[0] == 'p'
+                has_tb=filename.imagename[0] == 'p'
         )
 
     def get_image_reader_module(self):
+        """
+        Returns the path where the images are saved
+        and the dataset where this images are from.
+        """
         images_reader = importlib.import_module(
                 f"xrayreader.images.{self.dataset}").Reader
         return images_reader(path=self.path,
@@ -92,7 +110,11 @@ class IndiaDataset(DatasetBaseInterface):
         return data
 
 
-class Dataset:
+class Dataset: #pylint: disable=too-few-public-methods
+    """
+    Returns the data from a specific dataset,
+    India, China, or Montgomery.
+    """
     _datasets = {
         "india": IndiaDataset,
         "montgomery": MontgomeryDataset,
@@ -104,10 +126,16 @@ class Dataset:
         self.path = path
 
     def _get_dataset(self):
+        """
+        Returns the name and the path of the dataset.
+        """
         if self.name not in self._datasets:
             raise ValueError("Dataset not found")
         return self._datasets.get(self.name)(path=self.path)
 
     def get_data(self):
+        """
+        Return the data from the dataset.
+        """
         dataset = self._get_dataset()
         return dataset.get_data()
