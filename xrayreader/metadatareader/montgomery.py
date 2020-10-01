@@ -51,14 +51,18 @@ class Reader(ReaderBase):
         return age
 
     @staticmethod
-    def has_tb(report):
+    def check_normality(file):
         """
         Indicates whether the patient has TB or not,
         or if it is a case of missing data.
         """
-        if not report:
-            return None
-        return report.strip() != "normal"
+        try:
+            flag = int(re.findall(r'_(\d).txt', file)[0])
+            return[False, True][flag]
+        except (ValueError, IndexError):
+            pass
+        return None
+
 
     def parse_files(self):
         """
@@ -76,7 +80,7 @@ class Reader(ReaderBase):
                 xray = XRayImageMetadata(gender=gender,
                                          age=age,
                                          filename=file,
-                                         has_tb=self.has_tb(report),
+                                         check_normality =self.check_normality(file),
                                          report=report)
                 data_montgomery.append(xray)
         return data_montgomery
