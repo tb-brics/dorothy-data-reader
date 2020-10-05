@@ -79,6 +79,7 @@ class IndiaDataset(DatasetBaseInterface):
         self.path = kwargs.get("path")
         self.images_folder = kwargs.get("folder", "DatasetA")
 
+
     @staticmethod
     def get_metadata(filename):
         """
@@ -87,8 +88,9 @@ class IndiaDataset(DatasetBaseInterface):
         """
         return XRayImageMetadata(
                 filename=filename,
-                has_tb=filename.imagename[0] == 'p'
+                check_normality=filename.imagename[0] == 'p'
         )
+
 
     def get_image_reader_module(self):
         """
