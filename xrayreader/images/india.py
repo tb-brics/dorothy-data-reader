@@ -1,5 +1,5 @@
 """
-Get images from India DataSet
+Get data of the images from India DataSet.
 """
 
 import os.path
@@ -7,14 +7,20 @@ from .reader import ReaderBase
 
 
 class Reader(ReaderBase):
-    """
-    Get images from image data set
-    """
+    """Get data of the images from image dataset."""
     suffix = "*/*"
 
     def __init__(self, **kwargs):
         """
-        Initial method
+        Initial method.
+
+        Attributes
+        ----------
+        path: string
+            Path of the image.
+
+        dataset: string
+            Name of the dataset.
         """
         dataset = kwargs.get("dataset", "DatasetA")
         path = kwargs.get("path")

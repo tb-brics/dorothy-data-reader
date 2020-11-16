@@ -5,7 +5,21 @@ Structure for store metadata about a image
 class XRayImageMetadata: #pylint: disable=too-few-public-methods
     """
     This class returns the name of the file containing the x-ray image,
-    the gender, the age and then the report of the patient
+    the gender, the age and then the report of the patient.
+
+    Attributes
+    ----------
+    age: int
+        age of the patient
+    gender: str
+        gender of the patient
+    filename: str
+        the name of the file of the report
+    report: str
+        return the report of the patient
+    has_tb: boolean
+        return whether the patient has Tb
+
     """
     def __init__(self, **kwargs):
         """

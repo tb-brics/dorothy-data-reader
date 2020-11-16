@@ -1,5 +1,5 @@
 """
-Class for retriving data from several datasets
+Class for retrieving data from several datasets
 """
 import importlib
 import os.path
@@ -22,8 +22,7 @@ class DatasetBaseInterface: #pylint: disable=too-few-public-methods
 
 class DatasetBase(DatasetBaseInterface): #pylint: disable=too-few-public-methods
     """
-     stores the path where the files are saved
-      so that the data can be read.
+     Store the path where the files are saved so that the data can be read.
     """
     dataset = None
     metadata_folder = None
@@ -83,8 +82,13 @@ class IndiaDataset(DatasetBaseInterface):
     @staticmethod
     def get_metadata(filename):
         """
-        Returns the name of the file
-        and tells whether the patient from India has tb.
+        Return the name of the file and indicate
+        whether the patient from India has tb.
+
+        :param: filename
+        :type: string
+        :return: list with the filenames and `True` if the patient has tb, `False` otherwise
+        :rtype: list
         """
         return XRayImageMetadata(
                 filename=filename,
@@ -114,7 +118,7 @@ class IndiaDataset(DatasetBaseInterface):
 
 class Dataset: #pylint: disable=too-few-public-methods
     """
-    Returns the data from a specific dataset,
+    Return the data from a specific dataset,
     India, China, or Montgomery.
     """
     _datasets = {
@@ -129,7 +133,10 @@ class Dataset: #pylint: disable=too-few-public-methods
 
     def _get_dataset(self):
         """
-        Returns the name and the path of the dataset.
+        Return the name and the path of the dataset.
+
+        :return: name of the dataset and it's path
+        :rtype: string
         """
         if self.name not in self._datasets:
             raise ValueError("Dataset not found")
@@ -138,6 +145,9 @@ class Dataset: #pylint: disable=too-few-public-methods
     def get_data(self):
         """
         Return the data from the dataset.
+
+        :return: list with the metadata of the dataset
+        :rtype: list
         """
         dataset = self._get_dataset()
         return dataset.get_data()

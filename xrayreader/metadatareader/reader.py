@@ -7,7 +7,7 @@ import os.path
 
 class ReaderBase:
     """
-    This class stores the filenames into a list.
+    Store the filenames into a list.
     """
     suffix = "*"
 
@@ -20,6 +20,9 @@ class ReaderBase:
     def get_filenames(self):
         """
         Return the name of the file in which the report is stored.
+
+        :return: list of filenames
+        :rtype: list
         """
         if self.folder:
             self.filenames = glob.glob(self.folder)
@@ -27,5 +30,8 @@ class ReaderBase:
 
     def parse_files(self):
         """
-        This function stores patient data(age, gender, report) in a list 'data_china'.
+        Store patient data(age, gender, report) in a list 'data_china'.
+
+        :return: list of metadata of the patient - filename,gender,age,true(has tb) or false, normal or not.
+        :rtype: list
         """

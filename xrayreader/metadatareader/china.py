@@ -14,8 +14,10 @@ class Reader(ReaderBase):
     ----------
     gender: str
       gender of the patient
+
     age: int
       age of the patient
+
     report: str
       gives the report of the patient
     """
@@ -24,6 +26,9 @@ class Reader(ReaderBase):
         """
         Normally the first line is something like:
         <gender> <age>yrs
+
+        :return: gender, age
+        :rtype: string, int
         """
         firstline = firstline.lower()
         gender = None
@@ -43,6 +48,9 @@ class Reader(ReaderBase):
         """
         Indicates whether the patient has TB or not,
         or if it is a case of missing data.
+
+        :return: `True` if the patient has tb, `False` otherwise
+        :rtype: bool
         """
         try:
             flag = int(re.findall(r'_(\d).txt', file)[0])
@@ -54,6 +62,12 @@ class Reader(ReaderBase):
 
 
     def parse_files(self):
+        """
+        Stores patient data (age, gender, report) in a list 'data_montgomery'.
+
+        :return: list of metadata (gender, age, filename, `True` if has tb, report) of the patients
+        :rtype: list
+        """
         data_china = []
         for file in self.get_filenames():
             with open(file) as txtfile:

@@ -1,11 +1,9 @@
 """
-Get images from Montgomery DataSet
+Get data of the images from Montgomery DataSet.
 """
 
 from .reader import ReaderBase
 
 
 class Reader(ReaderBase):
-    """
-    Get images from image data set
-    """
+    """Get data of the images from image dataset."""
