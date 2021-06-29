@@ -2,6 +2,9 @@
 Structure for store metadata about a image
 """
 
+from ..utils import parse_filename
+
+
 class XRayImageMetadata: #pylint: disable=too-few-public-methods
     """
     This class returns the name of the file containing the x-ray image,
@@ -39,6 +42,7 @@ class XRayImageMetadata: #pylint: disable=too-few-public-methods
         self.age = kwargs.get('age', None)
         self.gender = kwargs.get('gender', None)
         self.filename = kwargs.get('filename', None)
+        self.path, self.imagename, extension = parse_filename(self.filename)
         self.report = kwargs.get('report', None)
         self.check_normality = kwargs.get('check_normality', None)
 

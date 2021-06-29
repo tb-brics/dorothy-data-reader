@@ -57,4 +57,8 @@ class ReaderBase:
         :return: list with the name of the images and the format of the image.
         :rtype: list
         """
-        return [Image(filename=f) for f in self.get_filenames()]
+        images = {}
+        for filename in self.get_filenames():
+            img_obj = Image(filename=filename)
+            images[img_obj.imagename] = img_obj
+        return images
