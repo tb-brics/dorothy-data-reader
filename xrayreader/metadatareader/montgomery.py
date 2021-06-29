@@ -93,7 +93,7 @@ class Reader(ReaderBase):
         :return: list of metadata (gender, age, filename, `True` if has tb, report) of the patients
         :rtype: list
         """
-        data_montgomery = []
+        data_montgomery = {}
         for file in self.get_filenames():
             with open(file) as txtfile:
                 content = txtfile.read()
@@ -107,5 +107,5 @@ class Reader(ReaderBase):
                                          filename=file,
                                          check_normality =self.check_normality(file),
                                          report=report)
-                data_montgomery.append(xray)
+                data_montgomery[xray.imagename] = xray
         return data_montgomery

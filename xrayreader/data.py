@@ -5,7 +5,6 @@ import importlib
 import os.path
 from .metadatareader.xray_image_metadata import XRayImageMetadata
 
-
 class DatasetBaseInterface: #pylint: disable=too-few-public-methods
     """
     Interface for Dataset Reader Classes
@@ -80,20 +79,20 @@ class IndiaDataset(DatasetBaseInterface):
 
 
     @staticmethod
-    def get_metadata(filename):
+    def get_metadata(imagename, filename):
         """
         Return the name of the file and indicate
         whether the patient from India has tb.
 
-        :param: filename
+        :param: imagename
         :type: string
         :return: list with the filenames and `True` if the patient has tb, `False` otherwise
         :rtype: list
         """
-        return XRayImageMetadata(
+        return (imagename, XRayImageMetadata(
                 filename=filename,
-                check_normality=filename.imagename[0] == 'p'
-        )
+                check_normality=imagename[0] == 'p'
+        ))
 
 
     def get_image_reader_module(self):
@@ -112,7 +111,10 @@ class IndiaDataset(DatasetBaseInterface):
         if self.images_folder:
             images = self.get_image_reader_module().get_images()
             data['data']['images'] = images
-            data['data']['metadata'] = [self.get_metadata(img) for img in images]
+            data['data']['metadata'] = dict([
+                self.get_metadata(imagename, img.filename)
+                for imagename, img in images.items()
+            ])
         return data
 
 
